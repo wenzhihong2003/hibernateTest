@@ -1,17 +1,13 @@
 package model;
 
 import cfg.MyNamingStrategy;
-import org.hibernate.Hibernate;
 import org.hibernate.SessionFactory;
-import org.hibernate.TypeHelper;
 import org.hibernate.cfg.Configuration;
-import org.hibernate.engine.spi.SessionFactoryImplementor;
 import org.hibernate.jdbc.Work;
 import org.hibernate.service.ServiceRegistry;
 import org.hibernate.service.ServiceRegistryBuilder;
-import org.hibernate.tutorial.hbm.SessionTemplate;
+import cfg.SessionTemplate;
 import org.hibernate.type.EnumType;
-import org.hibernate.type.Type;
 import org.junit.*;
 
 import java.net.MalformedURLException;
@@ -19,7 +15,7 @@ import java.sql.*;
 import java.util.*;
 import java.util.Date;
 
-import static org.hibernate.tutorial.hbm.Util.*;
+import static cfg.Util.*;
 
 /**
  * User: wenzhihong

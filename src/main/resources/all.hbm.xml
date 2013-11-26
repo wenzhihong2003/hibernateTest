@@ -1,0 +1,86 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="model">
+
+    <!--用于枚举的映射, 利用自定义类型-->
+    <typedef class="org.hibernate.type.EnumType" name="userGradeType">
+        <param name="enumClass">model.Grade</param>
+        <param name="useNamed">true</param>
+        <param name="type">12</param>
+    </typedef>
+    
+    <class name="User" discriminator-value="unknown" batch-size="5">
+        <id name="id">
+            <generator class="native"/>
+        </id>
+        <discriminator column="user_type" type="string"></discriminator> <!-- 用户类型标识-->
+        <version name="version"/>
+        <property name="name" />
+        <property name="age"/>
+        <property name="man" type="yes_no"/>
+        <property name="used" type="true_false"/>
+        <property name="grade" type="userGradeType"></property>
+        <set name="userRoles" inverse="true">
+            <key column="user_id" not-null="true" foreign-key="fk_use_id"></key>
+            <one-to-many class="UserRole"></one-to-many>
+        </set>
+
+        <subclass name="CommonUser"  discriminator-value="common"></subclass>
+        <subclass name="MangeUser" discriminator-value="manage"></subclass>
+    </class>
+
+    <class name="Role" batch-size="5" >
+       <id name="id">
+           <generator class="native"/>
+       </id>
+        <property name="name"/>
+       <set name="userRoles"  inverse="true">
+           <key column="role_id" not-null="true" foreign-key="fk_role_id"></key>
+           <one-to-many class="UserRole" />
+       </set>
+    </class>
+
+    <class name="UserRole">
+        <id name="id">
+            <generator class="native"/>
+        </id>
+        <many-to-one name="user" class="User"  column="user_id" cascade="save-update"/>
+        <many-to-one name="role" class="Role"  column="role_id" cascade="save-update" />
+    </class>
+
+    <class name="News" batch-size="2">
+        <id name="id">
+            <generator class="native"/>
+        </id>
+        <property name="title"/>
+        <property name="subTitle"/>
+        <property name="pubDate" type="timestamp"/>
+        <one-to-one name="newsDetail" class="NewsDetail" cascade="save-update"/>
+        <join table="news_detailss" fetch="select"  >
+            <key column="news_id"/>
+            <property name="subContent" />
+            <property name="content" />
+        </join>
+
+    </class>
+
+    <class name="NewsDetail">
+        <id name="id">
+            <generator class="foreign">
+                <param name="property">news</param>
+            </generator>
+        </id>
+        <property name="content"/>
+        <property name="subContent"/>
+    </class>
+
+
+
+
+
+
+
+</hibernate-mapping>

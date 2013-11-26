@@ -122,8 +122,12 @@ public class AllTest {
 
     }
 
+    /**
+     * 测试枚举的例子
+     * @throws Exception
+     */
     @Test
-    public void testDefault() throws Exception {
+    public void testUserEnum() throws Exception {
         new SessionTemplate() {
             @Override
             protected void doInSession() throws MalformedURLException {

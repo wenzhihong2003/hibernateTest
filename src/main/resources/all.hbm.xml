@@ -47,8 +47,8 @@
         <id name="id">
             <generator class="native"/>
         </id>
-        <many-to-one name="user" class="User"  column="user_id" cascade="save-update"/>
-        <many-to-one name="role" class="Role"  column="role_id" cascade="save-update" />
+        <many-to-one name="user" class="User" column="user_id" cascade="save-update"/>
+        <many-to-one name="role" class="Role" column="role_id" cascade="save-update" />
     </class>
 
     <class name="News" batch-size="2">

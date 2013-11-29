@@ -24,6 +24,12 @@
             <artifactId>hibernate-ehcache</artifactId>
             <version>${hibernateVersion}</version>
         </dependency>
+        <!--http://www.javacodegeeks.com/2013/09/how-to-maintain-history-of-tables-in-hibernate.html-->
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-envers</artifactId>
+            <version>${hibernateVersion}</version>
+        </dependency>
 
         <dependency>
             <groupId>mysql</groupId>
@@ -81,7 +87,6 @@
             <artifactId>ant</artifactId>
             <version>1.9.2</version>
         </dependency>
-
 
 
     </dependencies>
